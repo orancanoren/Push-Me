@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 // Start the app and configure it
 const app = express();
@@ -48,4 +48,5 @@ app.get('/', (req, res) => {
 
 app.post('/push', (req, res) => {
   // Handle a push
+  console.log('post received');
 })
