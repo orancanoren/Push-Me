@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Push Me</title>
+  <meta charset="utf-8" />
+</head>
+<body>
+  <h1>Push Me</h1>
+  <div id="push_button_container">
+    <button name="push_button">Push!</button>
+  </div>
+  <div id="recent_push">
+    <% if(pushes != []) { %>
+    <table>
+      <thead>
+        <tr>
+          <td>Timestamp</td>
+          <td>Country</td>
+          <td>City</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i=0; i < pushes.length; i++) { %>
+          <tr>
+            <td> <%= pushes[i].tstamp %> </td>
+            <td> <%= pushes[i].country %> </td>
+            <td> <%= pushes[i].city %> </td>
+          </tr>
+      </tbody>
+      <% } %>
+    </table>
+    <% }
+    else { %>
+      <div id="no_push">
+        <h2>Be the first to push!</h2>
+      </div>
+      <% } %>
+  </div>
+</body>
+</html>
