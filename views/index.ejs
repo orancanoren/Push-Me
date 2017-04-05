@@ -3,13 +3,14 @@
 <head>
   <title>Push Me</title>
   <meta charset="utf-8" />
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 </head>
-<body onlad="initialize()">
+  <p id="test"></p>
   <h1>Push Me</h1>
-    <div id="push_button_container">
-      <button name="push_button">Push!</button>
-    </div>
+    <a href= "muring-forest-45186.herokuapp.com/push">
+      <div id="push_button_container">
+        <button name="push_button">Push!</button>
+      </div>
+    </a>
   <div id="recent_push">
     <% if(pushes != []) { %>
     <table>
@@ -37,6 +38,6 @@
       </div>
       <% } %>
   </div>
-  <script type="text/javascript" src="main.js" />
+  <script type="text/javascript" src="main.js"></script>
 </body>
 </html>

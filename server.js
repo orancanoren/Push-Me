@@ -15,7 +15,9 @@ app.use(express.static(__dirname + '/public'));
 var db;
 app.listen(app.get('port'), function() {
   console.log('App is running on port %d', app.get('port'));
-  mongoose.connect(process.env.MONGODB_URI);
+  console.log('mongodb connecting to: ', (process.env.MONGODB_URI || "mongodb://localhost:25566"));
+  mongoose.Promise = global.Promise;
+  mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:25566");
   db = mongoose.connection;
   db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 });
@@ -48,8 +50,6 @@ app.get('/', (req, res) => {
 
 app.get('/push', (req, res) => {
   // Handle a push
-  console.log('GET request to /push');
-
   const req_ip = req.connection.remoteAddress;
   if (! req_ip) {
     console.error("cannot retrieve ip of the request");
