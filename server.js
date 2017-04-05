@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 
 app.get('/push', (req, res) => {
   // Handle a push
-  const req_ip = req.headers.x-forwarded-for;
+  const req_ip = req.headers['x-forwarded-for'];
   if (! req_ip) {
     console.error("cannot retrieve ip of the request");
     res.redirect('/');
