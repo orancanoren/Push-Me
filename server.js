@@ -7,14 +7,15 @@ const request = require('request');
 // Start the app and configure it
 const app = express();
 app.set('view engine', 'ejs');
+app.set('port', (process.env.PORT || 3000));
 app.use(morgan('tiny'));
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 // Set up the server & connect to the database
 var db;
-var listener = app.listen(process.env.PORT || 3000, '192.168.1.38', function() {
-  console.log('Listening on port %d', listener.address().port);
-  mongoose.connect('mongodb://localhost:25566/push_db');
+app.listen(app.get('port'), function() {
+  console.log('App is running on port %d', app.get('port'));
+  mongoose.connect(process.env.MONGODB_URI);
   db = mongoose.connection;
   db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 });
