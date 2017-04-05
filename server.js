@@ -63,10 +63,11 @@ app.get('/push', (req, res) => {
 
   request('http://www.ipinfo.io/' + req_ip, (error, response, body) => {
     if (error) return handleError(error);
+    body = JSON.parse(body);
     console.log('ipinfo response\n',body);
     var new_push = new push_model({
-      country: body.country,
-      city: body.city
+      country: body["country"],
+      city: body["city"]
     });
 
     new_push.save( (err) => {
