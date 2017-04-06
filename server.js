@@ -24,7 +24,7 @@ app.listen(app.get('port'), function() {
 
 // configure the database schema
 const push_schema = new mongoose.Schema({
-  tstamp: { type: Date, default: Date.now },
+  tstamp: Date,
   country: String,
   city: String
 });
@@ -64,10 +64,11 @@ app.get('/push', (req, res) => {
   request('http://www.ipinfo.io/' + req_ip, (error, response, body) => {
     if (error) return handleError(error);
     body = JSON.parse(body);
-    console.log('ipinfo response\n',body);
+    var time = new Date();
     var new_push = new push_model({
       country: body["country"],
-      city: body["city"]
+      city: body["city"],
+      tstamp: time
     });
 
     new_push.save( (err) => {
