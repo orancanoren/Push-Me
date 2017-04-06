@@ -50,14 +50,14 @@ app.get('/', (req, res) => {
 
 app.get('/push', (req, res) => {
   // Handle a push
-  const req_ip = req.headers['x-forwarded-for'];
+  const req_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   if (! req_ip) {
     console.error("cannot retrieve ip of the request");
     res.redirect('/');
   }
 
   function handleError(error) {
-    console.error(error);
+    console.error("error: ", error);
     return res.redirect('/');
   }
 
