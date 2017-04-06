@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const request = require('request');
 
 // Start the app and configure it
@@ -32,16 +31,10 @@ const push_schema = new mongoose.Schema({
 // Compile the model
 var push_model = mongoose.model('pushes', push_schema);
 
-// GET request incoming
 app.get('/', (req, res) => {
-  /*
-  var new_data = new push_model({ country: "Turkey", city: "Istanbul"});
-  new_data.save((err) => {
-    if(err) throw err;
-  })*/
   var query = push_model.find();
   query.sort({ tstamp: -1 });
-  query.limit(10);
+  query.limit(50);
   query.exec((err, result) => {
     if (err) return console.error(err);
     res.render('index.ejs', { pushes: result });
