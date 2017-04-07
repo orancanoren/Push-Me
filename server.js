@@ -58,7 +58,7 @@ app.get('/push', (req, res) => {
   request('http://www.ipinfo.io/' + req_ip, (error, response, body) => {
     if (error) return handleError(error);
     body = JSON.parse(body);
-    var time = stamp_prep(new Date());
+    time = new Date();
     var new_push = new push_model({
       country: body["country"],
       city: body["city"],
@@ -73,7 +73,3 @@ app.get('/push', (req, res) => {
 
   });
 });
-
-function stamp_prep(time) {
-
-}
