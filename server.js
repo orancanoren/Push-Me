@@ -2,19 +2,20 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const request = require('request');
+const path = require('path');
 
 // Start the app and configure it
 const app = express();
 app.set('view engine', 'ejs');
 app.set('port', (process.env.PORT || 3000));
 app.use(morgan('tiny'));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.resolve(__dirname, 'public')));
 
 // Set up the server & connect to the database
 var db;
 app.listen(app.get('port'), function() {
-  console.log('App is running on port %d', app.get('port'));
-  console.log('mongodb connecting to: ', (process.env.MONGODB_URI || "mongodb://localhost:25566"));
+  console.log('DEV: App is running on port %d', app.get('port'));
+  console.log('DEV: mongodb connecting to: ', (process.env.MONGODB_URI || "mongodb://localhost:25566"));
   mongoose.Promise = global.Promise;
   mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:25566");
   db = mongoose.connection;
@@ -34,7 +35,7 @@ var push_model = mongoose.model('pushes', push_schema);
 app.get('/', (req, res) => {
   var query = push_model.find();
   query.sort({ tstamp: -1 });
-  query.limit(50);
+  query.limit(25);
   query.exec((err, result) => {
     if (err) return console.error(err);
     res.render('index.ejs', { pushes: result });
@@ -45,12 +46,12 @@ app.get('/push', (req, res) => {
   // Handle a push
   const req_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   if (! req_ip) {
-    console.error("cannot retrieve ip of the request");
+    console.error("DEV: cannot acquire the ip address!");
     res.redirect('/');
   }
 
   function handleError(error) {
-    console.error("error: ", error);
+    console.error("DEV error: ", error);
     return res.redirect('/');
   }
 

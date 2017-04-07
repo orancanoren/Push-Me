@@ -5,16 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "concurrently \"npm run build\" \"nodemon server.js\"",
+    "start": "node server.js",
+    "build": "webpack",
+    "build:prod": "webpack -p"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/orancanoren/Push-Me.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Oran Can Ören",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/orancanoren/Push-Me/issues"
   },
@@ -29,7 +31,11 @@
     "request": "^2.81.0"
   },
   "devDependencies": {
+    "css-loader": "^0.28.0",
+    "node-sass": "^4.5.2",
     "nodemon": "^1.11.0",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
     "webpack": "^2.3.3"
   }
 }
