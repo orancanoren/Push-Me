@@ -2,35 +2,48 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster')
 @import url('https://fonts.googleapis.com/css?family=Poppins:700')
 
+$title_font: Poppins, serif
 $main_font: Raleway, serif
 $footer_font: Lobster, serif
 $light_color: #707070
-$title_font: Poppins, serif
 
 .footer
-  position: relative
-  margin-bottom: 0
+  position: absolute
+  bottom: 0px
+  width: 100%
   font-family: $footer_font
   text-align: right
   color: $light_color
 
 .container
-  position: absolute
   top: 10%
-  left: 50%
-  transform: translate(-50%, -50%)
+  margin: auto
+  width: 70%
+  text-align: center
+  position: relative
 
 #pushbutton_container
-  border-radius: 1px solid dashed
-  padding: 6px
+  background-color: white
+  border: 1px solid
+  color: black
+  padding: 15px 32px
+  text-align: center
+  text-decoration: none
+  display: inline-block
+  font-size: 16px
+  font-family: $footer_font
 
+#pushbutton_container:hover
+  background-color: $light_color
+  color: white
 
 thead td
   font-family: $title_font
-  font-weight: bold
+  font-weight: 500
 
 tbody td
   font-family: Raleway
+  font-weight: normal
 
 h1
   font-family: $title_font

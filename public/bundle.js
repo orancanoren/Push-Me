@@ -2021,7 +2021,7 @@ exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lob
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Poppins:700);", ""]);
 
 // module
-exports.push([module.i, ".footer {\n  position: relative;\n  margin-bottom: 0;\n  font-family: Lobster, serif;\n  text-align: right;\n  color: #707070; }\n\n.container {\n  position: absolute;\n  top: 10%;\n  left: 50%;\n  transform: translate(-50%, -50%); }\n\n#pushbutton_container {\n  border-radius: 1px solid dashed;\n  padding: 6px; }\n\nthead td {\n  font-family: Poppins, serif;\n  font-weight: bold; }\n\ntbody td {\n  font-family: Raleway; }\n\nh1 {\n  font-family: Poppins, serif;\n  text-align: center; }\n", ""]);
+exports.push([module.i, ".footer {\n  position: absolute;\n  bottom: 0px;\n  width: 100%;\n  font-family: Lobster, serif;\n  text-align: right;\n  color: #707070; }\n\n.container {\n  top: 10%;\n  margin: auto;\n  width: 70%;\n  text-align: center;\n  position: relative; }\n\n#pushbutton_container {\n  background-color: white;\n  border: 1px solid;\n  color: black;\n  padding: 15px 32px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  font-family: Lobster, serif; }\n\n#pushbutton_container:hover {\n  background-color: #707070;\n  color: white; }\n\nthead td {\n  font-family: Poppins, serif;\n  font-weight: 500; }\n\ntbody td {\n  font-family: Raleway;\n  font-weight: normal; }\n\nh1 {\n  font-family: Poppins, serif;\n  text-align: center; }\n", ""]);
 
 // exports
 
