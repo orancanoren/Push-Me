@@ -35,7 +35,7 @@ var push_model = mongoose.model('pushes', push_schema);
 app.get('/', (req, res) => {
   var query = push_model.find();
   query.sort({ tstamp: -1 });
-  query.limit(25);
+  query.limit(10);
   query.exec((err, result) => {
     if (err) return console.error(err);
     res.render('index.ejs', { pushes: result });
