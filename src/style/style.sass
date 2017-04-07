@@ -4,6 +4,8 @@
 $main_font: Raleway, serif
 $footer_font: Lobster, serif
 $light_color: #707070
+$heavy_blue: #1b52aa
+$light_blue: #2771e8
 
 .footer
   position: absolute
@@ -32,7 +34,7 @@ $light_color: #707070
   font-family: $footer_font
 
 #pushbutton_container:hover
-  background-color: $light_color
+  background-color: $heavy_blue
   color: white
 
 #recent_push
@@ -40,17 +42,26 @@ $light_color: #707070
 
 table
   margin: auto
+  td
+    font-family: $main_font
 
 thead td
-  font-family: $main_font
   font-weight: 600
 
 tbody td
-  font-family: Raleway
   font-weight: 200
 
 #head_title
   font-family: Raleway
-  font-weight: 600
+  font-weight: 200
   text-align: center
-  font-size: 48px
+  font-size: 14px
+  color: $light_color
+  #title
+    font-weight: 600
+    font-size: 48px
+    color: $light_blue
+
+  #subtitle
+    font-size: 20px
+    color: $heavy_blue
