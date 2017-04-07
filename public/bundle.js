@@ -2016,12 +2016,11 @@ function isnan (val) {
 
 exports = module.exports = __webpack_require__(4)(undefined);
 // imports
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Raleway:100);", ""]);
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Raleway:200,600);", ""]);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lobster);", ""]);
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Poppins:700);", ""]);
 
 // module
-exports.push([module.i, ".footer {\n  position: absolute;\n  bottom: 0px;\n  width: 100%;\n  font-family: Lobster, serif;\n  text-align: right;\n  color: #707070; }\n\n.container {\n  top: 10%;\n  margin: auto;\n  width: 70%;\n  text-align: center;\n  position: relative; }\n\n#pushbutton_container {\n  background-color: white;\n  border: 1px solid;\n  color: black;\n  padding: 15px 32px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  font-family: Lobster, serif; }\n\n#pushbutton_container:hover {\n  background-color: #707070;\n  color: white; }\n\nthead td {\n  font-family: Poppins, serif;\n  font-weight: 500; }\n\ntbody td {\n  font-family: Raleway;\n  font-weight: normal; }\n\nh1 {\n  font-family: Poppins, serif;\n  text-align: center; }\n", ""]);
+exports.push([module.i, ".footer {\n  position: absolute;\n  bottom: 0px;\n  width: 100%;\n  font-family: Lobster, serif;\n  text-align: right;\n  color: #707070; }\n\n.container {\n  top: 10%;\n  margin: auto;\n  width: 70%;\n  text-align: center;\n  position: relative; }\n\n#pushbutton_container {\n  background-color: white;\n  border: 1px solid;\n  color: black;\n  padding: 15px 32px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  font-family: Lobster, serif; }\n\n#pushbutton_container:hover {\n  background-color: #707070;\n  color: white; }\n\n#recent_push {\n  margin-top: 10%; }\n\ntable {\n  margin: auto; }\n\nthead td {\n  font-family: Raleway, serif;\n  font-weight: 600; }\n\ntbody td {\n  font-family: Raleway;\n  font-weight: 200; }\n\n#head_title {\n  font-family: Raleway;\n  font-weight: 600;\n  text-align: center;\n  font-size: 48px; }\n", ""]);
 
 // exports
 
