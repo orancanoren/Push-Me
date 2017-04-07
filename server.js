@@ -33,12 +33,16 @@ const push_schema = new mongoose.Schema({
 var push_model = mongoose.model('pushes', push_schema);
 
 app.get('/', (req, res) => {
+  var counter = push_model.count({});
   var query = push_model.find();
   query.sort({ tstamp: -1 });
   query.limit(10);
   query.exec((err, result) => {
     if (err) return console.error(err);
-    res.render('index.ejs', { pushes: result });
+    res.render('index.ejs', {
+      pushes: result,
+      total: counter
+    });
   });
 });
 
