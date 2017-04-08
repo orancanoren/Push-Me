@@ -6,6 +6,7 @@
   <meta name="description" content="Come and Push!" />
   <meta author="Oran Can Ören" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="bundle.js"></script>
 </head>
 <body>
   <div class="container">
@@ -20,7 +21,6 @@
       </div>
     </a>
   <div id="recent_push">
-    <% if(pushes != []) { %>
     <table>
       <thead>
         <tr>
@@ -32,22 +32,18 @@
       <tbody>
         <% for(var i=0; i < pushes.length; i++) { %>
           <tr>
-            <td> <%= pushes[i].tstamp %> </td>
+            <td> <%= pushes[i].time %> </td>
             <td> <%= pushes[i].country %> </td>
             <td> <%= pushes[i].city %> </td>
           </tr>
       </tbody>
       <% } %>
     </table>
-    <% } else { %>
-        <h2>Be the first to push!</h2>
-      <% } %>
   </div>
 </div>
 <div class="footer">
   <hr>
   <p>Brought to you by Oran</p>
 </div>
-  <script src="bundle.js" ></script>
 </body>
 </html>

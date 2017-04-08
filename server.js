@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const request = require('request');
 const path = require('path');
+const moment = require('moment');
 
 // Start the app and configure it
 const app = express();
@@ -24,7 +25,8 @@ app.listen(app.get('port'), function() {
 
 // configure the database schema
 const push_schema = new mongoose.Schema({
-  tstamp: Date,
+  date: Date,
+  time: String,
   country: String,
   city: String
 });
@@ -35,7 +37,7 @@ var push_model = mongoose.model('pushes', push_schema);
 app.get('/', (req, res) => {
   var counter = push_model.count({});
   var query = push_model.find();
-  query.sort({ tstamp: -1 });
+  query.sort({ date: -1 });
   query.limit(10);
   query.exec((err, result) => {
     if (err) return console.error(err);
@@ -62,12 +64,15 @@ app.get('/push', (req, res) => {
   request('http://www.ipinfo.io/' + req_ip, (error, response, body) => {
     if (error) return handleError(error);
     body = JSON.parse(body);
-    time = new Date();
+    time = moment().format("MMM-DD-YYYY | hh-mm-ss A");
+    console.log('time: ', time)
     var new_push = new push_model({
       country: body["country"],
       city: body["city"],
-      tstamp: time
+      date: moment(),
+      time: time
     });
+    console.log('new push date: ', new_push.tstamp);
 
     new_push.save( (err) => {
       if (err) return handleError(error);
@@ -77,3 +82,18 @@ app.get('/push', (req, res) => {
 
   });
 });
+
+// A utility function to parse dates
+function parseDate(time) {
+  var monthNames = [
+    "Jan", "Feb", "Mar", "Apr",
+    "May", "June", "July", "Aug",
+    "Sep", "Oct", "Nov", "Dec"
+  ];
+
+  var day = time.getDate();
+  var monthInd = time.getMonth();
+  var year = time.getFullYear();
+
+  return day + ' ' + monthNames[monthInd] + ' ' + year
+}
