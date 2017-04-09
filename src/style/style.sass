@@ -1,29 +1,61 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:200,600')
-@import url('https://fonts.googleapis.com/css?family=Lobster')
+@import url('https://fonts.googleapis.com/css?family=Lobster|Raleway:300')
 
 $main_font: Raleway, serif
 $footer_font: Lobster, serif
-$light_white: #707070
-$heavy_white: #444444
-$heavy_blue: #1b52aa
-$light_blue: #2771e8
+$main_bg: white
 
-.footer
-  position: absolute
-  bottom: 0px
-  width: 99%
-  font-family: $footer_font
-  text-align: right
-  color: $heavy_white
-  background-color: white
+$header_bg: #34495e
+$footer_bg: #303030
+$table_bg: #95a5a6
+
+html, body
+  margin: 0
+  height: 100%
 
 .container
-  margin: auto
-  width: 70%
+  width: 100%
+  min-height: 100%
+  height: auto !important
+  height: 100%
+  margin: 0 auto -5px
   text-align: center
-  position: relative
 
-#pushbutton_container
+.header
+  height: 80px
+  background-color: $header_bg
+  font-family: $main_font
+  color: white
+  font-weight: 600
+  font-size: 42px
+
+.pushbutton_container
+  position: relative
+  background-color: white
+  font-size: 20px
+  font-family: $main_font
+  text-align: center
+
+.recent_push
+  top: 20px
+  width: 100%
+  position: relative
+  bottom: 0
+  background-color: $table_bg
+  color: white
+
+.footer
+  position: fixed
+  bottom: 0
+  height: 40px
+  width: 100%
+  font-family: $footer_font
+  text-align: right
+  color: white
+  background-color: $footer_bg
+  border-top: 1px solid
+
+#pushbutton
+  margin-top: 2%
   background-color: white
   border: 1px solid
   color: black
@@ -34,12 +66,12 @@ $light_blue: #2771e8
   font-size: 16px
   font-family: $footer_font
 
-#pushbutton_container:hover
-  background-color: $heavy_blue
+#pushbutton:hover
+  background-color: $header_bg
   color: white
 
-#recent_push
-  margin-top: 5%
+#oran
+  padding-right: 15px
 
 table
   margin: auto
@@ -51,18 +83,3 @@ thead td
 
 tbody td
   font-weight: 200
-
-#head_title
-  font-family: Raleway
-  font-weight: 200
-  text-align: center
-  font-size: 14px
-  color: $light_white
-  #title
-    font-weight: 600
-    font-size: 48px
-    color: $light_blue
-
-  #subtitle
-    font-size: 20px
-    color: $heavy_blue
