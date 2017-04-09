@@ -65,7 +65,7 @@ app.get('/push', (req, res) => {
     if (error) return handleError(error);
     body = JSON.parse(body);
     time = moment().format("MMM-DD-YYYY | hh-mm-ss A");
-    console.log('time: ', time)
+    console.log('New push:\nTime: ', time,'\nIPdata: ', body);
     var new_push = new push_model({
       country: body["country"],
       city: body["city"],
