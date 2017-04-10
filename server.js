@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
   var counter = push_model.count({});
   var query = push_model.find();
   query.sort({ date: -1 });
-  query.limit(25);
+  query.limit(15);
   query.exec((err, result) => {
     if (err) return console.error(err);
     res.render('index.ejs', {
