@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"npm run build\" \"nodemon server.js\"",
+    "dev": "concurrently \"npm run build\" \"node run start\"",
     "start": "node server.js",
     "build": "webpack",
     "build:prod": "webpack -p"
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/orancanoren/Push-Me#readme",
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "body-parser": "^1.17.1",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
@@ -29,6 +30,7 @@
     "mongodb": "^2.2.25",
     "mongoose": "^4.9.3",
     "morgan": "^1.8.1",
+    "node-geocoder": "^3.16.0",
     "request": "^2.81.0"
   },
   "devDependencies": {

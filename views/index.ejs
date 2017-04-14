@@ -8,18 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+  <% include util/formatDate.ejs %>
   <div class="container">
     <div class="header">
         Push Me<br />
+        <p id="error"></p>
     </div>
     <div class="pushbutton_container">
       Let's Push<br />
       <i>Go on, push it!</i><br />
-      <a href= "/push">
         <div id="pushbutton">
           PUSH!
         </div>
-      </a>
     </div>
     <div class="recent_push">
       <table>
@@ -33,7 +33,8 @@
         <tbody>
           <% for(var i=0; i < pushes.length; i++) { %>
             <tr>
-              <td> <%= pushes[i].time %> </td>
+              <% var formattedDate = formatDate(pushes[i].date) %>
+              <td> <%= formattedDate %> - <%= pushes[i].time %> </td>
               <td> <%= pushes[i].country %> </td>
               <td> <%= pushes[i].city %> </td>
             </tr>
