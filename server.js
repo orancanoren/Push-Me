@@ -102,7 +102,7 @@ app.post('/push', (req, res) => {
     new_push.save( (err) => {
       if (err) return handleError(error);
       console.log('DEV: Saved new push');
-      res.redirect('/');
     });
   });
+  res.redirect('/');
 });

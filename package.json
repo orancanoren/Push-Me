@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/orancanoren/Push-Me#readme",
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "body-parser": "^1.17.1",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
