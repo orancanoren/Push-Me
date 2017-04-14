@@ -59,6 +59,7 @@ app.get('/', (req, res) => {
   var counter = push_model.count({});
   var query = push_model.find();
   query.sort({ date: -1 });
+  query.sort({ time: -1 });
   query.exec((err, result) => {
     if (err) return console.error(err);
     res.render('index.ejs', {
@@ -75,35 +76,33 @@ app.post('/push', (req, res) => {
   geocoder.reverse({
     lat: req.body.latitude,
     lon: req.body.longitude
-  }, (err, res) => {
+  }, (err, geoResponse) => {
     if (err) {
       console.error('Error during reverse geocoding!');
       return handleError(err);
     }
-    city = res[0].administrativeLevels.level1long;
-    country = res[0].country;
+    city = geoResponse[0].administrativeLevels.level1long;
+    country = geoResponse[0].country;
     console.log('City: ', city, '\nCountry: ', country);
-  });
-
-  const req_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  if (! req_ip) {
-    console.error("DEV: cannot acquire the ip address!");
-  }
-
-  var new_push = new push_model({
-    country: country,
-    city: city,
-    date: moment().format("MMM-DD-YYYY"),
-    time: moment().format("hh:mm:ss"),
-    longitude: req.body.longitude,
-    latitude: req.body.latitude,
-    ipAddr: req_ip
-  });
-  console.log('DEV - New push: ', new_push);
-
-  new_push.save( (err) => {
-    if (err) return handleError(error);
-    console.log('saved new push');
-    return res.redirect('/');
+    // MARK: get ip
+    const req_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    if (! req_ip) {
+      console.error("DEV: cannot acquire the ip address!");
+    }
+    var new_push = new push_model({
+      country: country,
+      city: city,
+      date: moment().format("MMM-DD-YYYY"),
+      time: moment().format("hh:mm:ss"),
+      longitude: req.body.longitude,
+      latitude: req.body.latitude,
+      ipAddr: req_ip
+    });
+    console.log('DEV - New push: ', new_push);
+    new_push.save( (err) => {
+      if (err) return handleError(error);
+      console.log('saved new push');
+      res.redirect('/');
+    });
   });
 });
