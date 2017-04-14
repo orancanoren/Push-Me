@@ -2019,7 +2019,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Lobster|Raleway:300);", ""]);
 
 // module
-exports.push([module.i, "html, body {\n  margin: 0;\n  height: 100%; }\n\n.container {\n  width: 100%;\n  height: 100%;\n  margin: 0 0 0;\n  text-align: center; }\n\n.header {\n  height: 80px;\n  background-color: #34495e;\n  font-family: Raleway, serif;\n  color: white;\n  font-weight: 600;\n  font-size: 42px; }\n\n.pushbutton_container {\n  position: relative;\n  background-color: white;\n  font-size: 20px;\n  font-family: Raleway, serif;\n  text-align: center; }\n\n.recent_push {\n  margin: 20px 0 0;\n  width: 100%;\n  position: relative;\n  background-color: #95a5a6;\n  color: white;\n  padding-bottom: 40px; }\n\n.footer {\n  position: fixed;\n  bottom: 0;\n  height: 40px;\n  width: 100%;\n  font-family: Lobster, serif;\n  text-align: right;\n  color: white;\n  background-color: #303030; }\n\n#pushbutton {\n  margin-top: 2%;\n  background-color: white;\n  border: 1px solid;\n  color: black;\n  padding: 15px 32px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  font-family: Lobster, serif; }\n\n#pushbutton:hover {\n  background-color: #34495e;\n  color: white; }\n\n#oran {\n  padding-right: 15px; }\n\ntable {\n  margin: auto; }\n  table td {\n    font-family: Raleway, serif; }\n\nthead td {\n  font-weight: 600; }\n\ntbody td {\n  font-weight: 200; }\n", ""]);
+exports.push([module.i, "html, body {\n  margin: 0;\n  height: 100%; }\n\n.container {\n  width: 100%;\n  height: 100%;\n  margin: 0 0 0;\n  text-align: center; }\n\n.header {\n  height: 80px;\n  background-color: #34495e;\n  font-family: Raleway, serif;\n  color: white;\n  font-weight: 600;\n  font-size: 42px; }\n\n.pushbutton_container {\n  position: relative;\n  background-color: white;\n  font-size: 20px;\n  font-family: Raleway, serif;\n  text-align: center; }\n\n.recent_push {\n  margin: 20px 0 0;\n  width: 100%;\n  position: absolute;\n  background-color: #95a5a6;\n  color: white;\n  padding-bottom: 40px; }\n\n.footer {\n  position: fixed;\n  bottom: 0;\n  height: 40px;\n  width: 100%;\n  font-family: Lobster, serif;\n  text-align: right;\n  color: white;\n  background-color: #303030; }\n\n#pushbutton {\n  margin-top: 2%;\n  background-color: white;\n  border: 1px solid;\n  color: black;\n  padding: 15px 32px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 16px;\n  font-family: Lobster, serif;\n  cursor: pointer; }\n\n#pushbutton:hover {\n  background-color: #34495e;\n  color: white; }\n\n#oran {\n  padding-right: 15px; }\n\ntable {\n  margin: auto; }\n  table td {\n    font-family: Raleway, serif; }\n\nthead td {\n  font-weight: 600; }\n\ntbody td {\n  font-weight: 200; }\n", ""]);
 
 // exports
 
@@ -2634,6 +2634,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_style_sass__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_style_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_style_sass__);
 
+
+// User clicks on the push button
+var button = document.getElementById('pushbutton');
+var error_disp = document.getElementById('error');
+function geoLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(push);
+  }
+  else {
+    error_disp.innerHTML = "Navigator doesn't support geolocation";
+  }
+}
+function push(position) {
+  fetch('push',
+    {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        'longitude': position.coords.longitude,
+        'latitude': position.coords.latitude
+      })
+    });
+}
+button.addEventListener('click', geoLocation);
 
 
 /***/ })

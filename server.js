@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const request = require('request');
 const path = require('path');
 const moment = require('moment');
+const bodyParser = require('body-parser');
+const nodeGeocoder = require('node-geocoder');
 
 // Start the app and configure it
 const app = express();
@@ -11,6 +13,22 @@ app.set('view engine', 'ejs');
 app.set('port', (process.env.PORT || 3000));
 app.use(morgan('tiny'));
 app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(bodyParser.json());
+
+// Utility functions
+function handleError(error) {
+  console.error("DEV error: ", error);
+  return res.redirect('/');
+}
+
+var options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: 'AIzaSyAi1yCNi-7IRo3_Pb-vgiwIgrLyk8x9oxI',
+  formatter: null
+};
+var geocoder = nodeGeocoder(options);
+
 
 // Set up the server & connect to the database
 var db;
@@ -25,10 +43,13 @@ app.listen(app.get('port'), function() {
 
 // configure the database schema
 const push_schema = new mongoose.Schema({
+  ipAddr: String,
   date: Date,
   time: String,
   country: String,
-  city: String
+  city: String,
+  longitude: Number,
+  latitude: Number
 });
 
 // Compile the model
@@ -47,52 +68,42 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get('/push', (req, res) => {
-  // Handle a push
+app.post('/push', (req, res) => {
+  console.log('--------\nDEV: [POST] to /push with ', req.body, '--------\n');
+  var city = "";
+  var country = "";
+  geocoder.reverse({
+    lat: req.body.latitude,
+    lon: req.body.longitude
+  }, (err, res) => {
+    if (err) {
+      console.error('Error during reverse geocoding!');
+      return handleError(err);
+    }
+    city = res[0].administrativeLevels.level1long;
+    country = res[0].country;
+    console.log('City: ', city, '\nCountry: ', country);
+  });
+
   const req_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   if (! req_ip) {
     console.error("DEV: cannot acquire the ip address!");
-    res.redirect('/');
   }
 
-  function handleError(error) {
-    console.error("DEV error: ", error);
+  var new_push = new push_model({
+    country: country,
+    city: city,
+    date: moment().format("MMM-DD-YYYY"),
+    time: moment().format("hh:mm:ss"),
+    longitude: req.body.longitude,
+    latitude: req.body.latitude,
+    ipAddr: req_ip
+  });
+  console.log('DEV - New push: ', new_push);
+
+  new_push.save( (err) => {
+    if (err) return handleError(error);
+    console.log('saved new push');
     return res.redirect('/');
-  }
-
-  request('http://www.ipinfo.io/' + req_ip, (error, response, body) => {
-    if (error) return handleError(error);
-    body = JSON.parse(body);
-    time = moment().format("MMM-DD-YYYY | hh-mm-ss A");
-    console.log('New push:\nTime: ', time,'\nIPdata: ', body);
-    var new_push = new push_model({
-      country: body["country"],
-      city: body["city"],
-      date: moment(),
-      time: time
-    });
-    console.log('new push date: ', new_push.tstamp);
-
-    new_push.save( (err) => {
-      if (err) return handleError(error);
-      console.log('saved new push');
-      return res.redirect('/');
-    });
-
   });
 });
-
-// A utility function to parse dates
-function parseDate(time) {
-  var monthNames = [
-    "Jan", "Feb", "Mar", "Apr",
-    "May", "June", "July", "Aug",
-    "Sep", "Oct", "Nov", "Dec"
-  ];
-
-  var day = time.getDate();
-  var monthInd = time.getMonth();
-  var year = time.getFullYear();
-
-  return day + ' ' + monthNames[monthInd] + ' ' + year
-}
