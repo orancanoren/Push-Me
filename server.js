@@ -59,6 +59,7 @@ app.get('/', (req, res) => {
   var counter = push_model.count({});
   var query = push_model.find();
   query.sort({ date: -1 });
+  query.limit(25);
   query.sort({ time: -1 });
   query.exec((err, result) => {
     if (err) return console.error(err);
@@ -70,7 +71,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/push', (req, res) => {
-  console.log('--------\nDEV: [POST] to /push with ', req.body, '--------\n');
+  console.log('--------\nDEV: [POST] to /push with ', req.body, '\n--------');
   var city = "";
   var country = "";
   geocoder.reverse({
@@ -83,7 +84,6 @@ app.post('/push', (req, res) => {
     }
     city = geoResponse[0].administrativeLevels.level1long;
     country = geoResponse[0].country;
-    console.log('City: ', city, '\nCountry: ', country);
     // MARK: get ip
     const req_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     if (! req_ip) {
@@ -92,16 +92,16 @@ app.post('/push', (req, res) => {
     var new_push = new push_model({
       country: country,
       city: city,
-      date: moment().format("MMM-DD-YYYY"),
-      time: moment().format("hh:mm:ss"),
+      date: moment(req.body.time).format("MMM-DD-YYYY"),
+      time: moment(req.body.time).format("hh:mm:ss"),
       longitude: req.body.longitude,
       latitude: req.body.latitude,
       ipAddr: req_ip
     });
-    console.log('DEV - New push: ', new_push);
+    console.log('DEV - New push from ', city, '/', country);
     new_push.save( (err) => {
       if (err) return handleError(error);
-      console.log('saved new push');
+      console.log('DEV: Saved new push');
       res.redirect('/');
     });
   });

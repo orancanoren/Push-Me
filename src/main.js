@@ -18,7 +18,8 @@ function push(position) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         'longitude': position.coords.longitude,
-        'latitude': position.coords.latitude
+        'latitude': position.coords.latitude,
+        'time': new Date
       })
     });
 }
