@@ -6,8 +6,8 @@
 
 - [x] Location detection by request.ip
 - [x] Time detection by server
-- [ ] Accurate location detection
-- [ ] Accurate time detection
+- [x] Accurate location detection
+- [x] Accurate time detection
 - [ ] Better push button
 - [ ] Better design
 <hr />
