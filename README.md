@@ -9,7 +9,7 @@
 - [x] Accurate location detection
 - [x] Accurate time detection
 - [ ] Better push button
-- [ ] Better design
+- [x] Better design
 <hr />
 <h2>Technologies Being Used</h2>
 <ul>
