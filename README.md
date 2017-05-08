@@ -25,4 +25,5 @@
 <li><b>Database</b> MongoDB</li>
 <li><b>Templating</b> EJS, React.js</li>
 <li><b>Styling</b> Materialize-CSS</li>
+<li><b>Bundling</b> Webpack</li>
 </ul>
