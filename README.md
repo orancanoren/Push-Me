@@ -10,6 +10,14 @@
 - [x] Accurate time detection
 - [ ] Better push button
 - [x] Better design
+- [ ] Make the About section
+- [ ] Set a dynamically updating table (i.e. new pushes come get inserted without refresh)
+- [ ] Make the Analytics section
+<ul><ul>
+<li>Group pushes into countries</li>
+<li>Draw charts etc.</li>
+<li>Generate various statistics</li>
+</ul></ul>
 <hr />
 <h2>Technologies Being Used</h2>
 <ul>
